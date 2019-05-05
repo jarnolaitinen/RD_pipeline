@@ -1,0 +1,25 @@
+#lftpinput:
+#  class: File
+#  path: http://86.50.168.37:8000/lftp.txt
+
+curl_fastq_urls:
+  class: File
+  path: http://86.50.168.37:8000/fastq_files_urls.txt
+curl_reference_genome_url:
+  class: File
+  path: http://86.50.168.37:8000/reference_seq_url.txt
+curl_indels_url:
+  class: File
+  path: http://86.50.168.37:8000/indels_url.txt
+# DEBUG
+#trimmed_fastq:
+#  class: File
+#  path: /mnt/data/input/U5c_CCGTCC_L001_R1_001.fastq.gz.trimmed.fastq.gz
+reference_genome: 
+  class: File
+  path: /mnt/input/hs37d5.fa  
+#hs37d5.fa.amb  hs37d5.fa.ann  hs37d5.fa.bwt  hs37d5.fa.pac  hs37d5.fa.sa
+
+readgroup_str: '@RG\tID:Seq01p\tSM:Seq01\tPL:ILLUMINA\tPI:330'
+# GATK Haplotype caller sequence
+chromosome: '1'

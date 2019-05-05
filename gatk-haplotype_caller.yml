@@ -1,0 +1,17 @@
+# Reference genome
+# -R 
+# also .fai and .dict needed
+reference_sequence:
+  class: File
+  path: /mnt/data/input/hs37d5.fa
+
+# recalibrated BAM -I and .bai
+input:
+  class: File
+  path: /mnt/data/input/aln.sorted.dedup.realigned.recalibrated.bam
+
+# -L string
+chromosome: '1' 
+# -o
+#output_filename: the.vcf
+

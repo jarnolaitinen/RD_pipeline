@@ -1,0 +1,5 @@
+# from BWA mem
+input:
+  class: File
+  path: /mnt/data/input/recalibrated.bam
+ # aln.bam

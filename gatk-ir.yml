@@ -1,0 +1,14 @@
+# -I
+input:
+  class: File
+  path: /mnt/data/input/aln.sorted.dedup.bam
+# -targetIntervals 
+# from the previous step
+rtc_intervals:
+  class: File
+  path: /mnt/data/input/realign.intervals
+#-R
+reference_genome:
+  class: File
+  path: /mnt/data/input/hs37d5.fa
+# -O

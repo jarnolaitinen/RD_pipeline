@@ -1,0 +1,4 @@
+lftpinput:
+  class: File
+  path: http://86.50.168.37:8000/lftp.txt
+touchfilename: out.txt 
