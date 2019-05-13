@@ -3,13 +3,28 @@ cwlVersion: v1.0
 $namespaces:
   sbg: 'https://www.sevenbridges.com/'
 id: rtc
+
+requirements:
+  - class: InlineJavascriptRequirement
+  - class: DockerRequirement
+    dockerPull: cnag/gatk:3.6-0
+  - class: ResourceRequirement
+    coresMin: 4
+    ramMin: 8000
+    outdirMin: 7500
+    tmpdirMin: 7700
+  - class: InitialWorkDirRequirement
+    listing:
+      - entry: $(inputs.reference_genome)
+      - entry: $(inputs.dict)
+      - entry: $(inputs.known_indels)
 baseCommand:
   - gatk
   - '-T'
   - RealignerTargetCreator
+
 inputs:
   - id: input
-    # type: File[]
     type: File
     inputBinding:
       position: 2
@@ -18,42 +33,36 @@ inputs:
       - ^.bai
   - id: rtc_intervals_name
     type: string? 
-    default: 'rtc_intervals.txt'
+    default: 'rtc_intervals.list'
   - id: reference_genome
-   # type: File[]
     type: File
     inputBinding:
       position: 1
       prefix: '-R'
     secondaryFiles:
       - .fai
-  - id: dict
-    type: File
+     # - .dict
   - id: known_indels
-    type: File[]
+    type: File
     inputBinding:
       position: 4
       prefix: '--known'
-outputs:
-  - id: rtc_intervals_file
+  - id: dict
     type: File
-    outputBinding:
-      glob: $(inputs.rtc_intervals_name)
-label: rtc 
+      
 arguments:
   - position: 5
     prefix: '-dt'
     valueFrom: NONE
   - position: 3
     prefix: '-o'
-    valueFrom: $(inputs.rtc_intervals_name)  
-requirements:
-  - class: InlineJavascriptRequirement
- 
-  - class: DockerRequirement
-    dockerPull: cnag/gatk:3.6-0
-  - class: ResourceRequirement
-    coresMin: 4
-    ramMin: 8000
-    outdirMin: 7500
-    tmpdirMin: 7700
+    valueFrom: $(inputs.rtc_intervals_name)
+
+
+outputs:
+  - id: rtc_intervals_file
+    type: File
+    outputBinding:
+      glob: "*.list" 
+ #$(inputs.rtc_intervals_name)
+label: rtc 

@@ -8,24 +8,29 @@ inputs:
     type: File
   - id: curl_fastq_urls
     type: File
-  - id: curl_indels_url
+  - id: curl_known_indels_url
+    type: File
+  - id: curl_known_sites_url
     type: File
   - id: readgroup_str
     type: string
   - id: chromosome
     type: string
-#  - id: lftp_out_conf
-#    type: File
-# DEBUG
-  - id: reference_genome
+
+  - id: lftp_out_conf
     type: File
+# DEBUG
+#  - id: trimmed_fastq
+#    type: File
+#  - id: reference_genome
+#    type: File
     # these are produced by bwa index step
-    secondaryFiles:
-      - .amb
-      - .ann
-      - .bwt
-      - .pac
-      - .sa
+#    secondaryFiles:
+#      - .amb
+#      - .ann
+#      - .bwt
+#      - .pac
+#      - .sa
 #  - id: bwa_output_filename
 #    type: string
 #  - id: bwa_mem_file
@@ -77,15 +82,54 @@ steps:
         #items: File
     run: curl.cwl
 
-  - id: indels_in
+  - id: known_indels_in
     in:
       - id: curl_config_file
-        source: curl_indels_url
+        source: curl_known_indels_url
     out:
-      - id: in_files
+      - id: known_indels_file
         #type: array
         #items: File
-    run: curl.cwl
+    run: curl_indels.cwl
+
+  - id: known_sites_in
+    in:
+      - id: curl_config_file
+        source: curl_known_sites_url
+    out:
+      - id: known_sites_file
+        #type: array
+        #items: File
+    run: curl_known_sites.cwl
+
+  - id: unzipped_known_sites
+    in:
+      - id: known_sites_file
+        source:
+          - known_sites_in/known_sites_file
+    out:
+      - id: unzipped_known_sites_file
+    run: gunzip_known_sites.cwl
+
+  - id: gunzip
+    in:
+      - id: reference_file
+        source:
+          - reference_in/in_files
+    out:
+      - id: unzipped_fasta
+    run: gunzip.cwl
+
+  - id: picard_dictionary
+    # from samtools reference genome
+    in:
+      - id: reference_genome
+        source:
+          - gunzip/unzipped_fasta
+    # produced .dict file
+    out:
+      - id: dict
+    run: picard_dictionary.cwl
 
   - id: cutadapt2
     in:
@@ -98,49 +142,27 @@ steps:
       - id: trimmed_fastq
     run: cutadapt-v.1.18.cwl
 
-#  - id: gunzip
-#    in: 
-#      - id: reference_file
-#        source:
-#          - reference_in/in_files
-#    out:
-#      - id: unzipped_fasta
-#    run: gunzip.cwl
-
-#  - id: bwa_index
-#    # the takes the fa.gz reference genome as input
-#    in:
-#      - id: reference_genome
-#        source:
-#          - gunzip/unzipped_fasta
-#      # algorith is by default  bwtsw
-#      # algorithm: index_algorithm
-#      # also blocksize could be tuned
-#    # produced .amb, .ann, .bwt, .pac, and .sa files
-#    out:
-#      - id: output
-#    run: bwa-index.cwl
-
-  - id: picard_dictionary
-    # from samtools reference genome
+  - id: bwa_index
+    # the takes the fa.gz reference genome as input
     in:
       - id: reference_genome
         source:
-          - reference_genome
-#        source:
-#          - gunzip/unzipped_fasta
-    # produced .dict file
+          - gunzip/unzipped_fasta
+      # algorith is by default  bwtsw
+      # algorithm: index_algorithm
+      # also blocksize could be tuned
+      # produced .amb, .ann, .bwt, .pac, and .sa files
     out:
-      - id: dict
-    run: picard_dictionary.cwl
+      - id: output
+    run: bwa-index.cwl
 
   - id: samtools_index
     # reference genome .fa
     in:
       - id: input
         source:
-#          - gunzip/unzipped_fasta
-          - reference_genome
+          - gunzip/unzipped_fasta
+#          - reference_genome
     # produces .fai
     out:
       - id: index_fai
@@ -153,16 +175,16 @@ steps:
     in:
       - id: trimmed_fastq
         source:
-          - cutadapt2/trimmed_fastq
-     #     - trimmed_fastq
+         - cutadapt2/trimmed_fastq
+    #      - trimmed_fastq
       - id: read_group
         source:
           - readgroup_str
       # this includes also many secondaryFiles too
       - id: reference_genome
         source:
-       #   - bwa_index/output
-          - reference_genome
+          - bwa_index/output
+       #   - reference_genome
     # output is a SAM file
     out:
       - id: aligned_sam
@@ -201,14 +223,13 @@ steps:
           - picard_markduplicates/md_bam
       - id: reference_genome
         source: 
-      #     - reference_in/in_files
           - samtools_index/index_fai
       - id: dict
         source:
           - picard_dictionary/dict
       - id: known_indels
-        source: 
-          - indels_in/in_files
+        source:
+          - known_indels_in/known_indels_file
     out:
       - id: rtc_intervals_file
     run: gatk3-rtc.cwl
@@ -245,9 +266,12 @@ steps:
       - id: input
         source:
           - gatk-ir/realigned_bam
-      - id: known_sites
+      - id: unzipped_known_sites_file
         source:
-          - indels_in/in_files
+          - unzipped_known_sites/unzipped_known_sites_file
+      - id: known_indels_file
+        source:
+          - known_indels_in/known_indels_file
     out:
       - id: br_model 
     run: gatk-base_recalibration.cwl
@@ -291,14 +315,18 @@ steps:
       - id: gvcf
     run: gatk-haplotype_caller.cwl
     label: gatk-haplotype_caller
-#    'sbg:x': 943.1527709960938
-#    'sbg:y': -166.19444274902344
-#  lftp_out:
-#    in: 
-#      lftp_out_conf: lftp_out_conf
-#      # files_to_send: bwa_mem/output
-#      files_to_send: [picard_markduplicates/md_bam, picard_markduplicates/output_metrics]
-#    out: []
-#    run: lftp.cwl
-#requirements:
-#  - class: MultipleInputFeatureRequirement
+  - id: lftp_out
+    in: 
+      - id: lftp_out_conf
+        source: lftp_out_conf
+      - id: files_to_send
+        source:
+          - picard_markduplicates/output_metrics
+          - gatk-base_recalibration/br_model
+      - id: gvcf
+        source:      
+          - gatk_haplotype_caller/gvcf
+    out: []
+    run: lftp.cwl
+requirements:
+  - class: MultipleInputFeatureRequirement

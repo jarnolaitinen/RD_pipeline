@@ -9,7 +9,7 @@ arguments:
   - position: 4
     prefix: '-o'
     # nameroot instead of basename
-    valueFrom: '$(inputs.raw_sequences[0].nameroot + ".trimmed.fastq.gz")' 
+    valueFrom: '$(inputs.raw_sequences[0].basename + ".trimmed.fastq.gz")' 
   - position: 3
     prefix: '--overlap'
     valueFrom: '6'

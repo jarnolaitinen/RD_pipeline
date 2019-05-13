@@ -4,10 +4,27 @@ $namespaces:
   sbg: 'https://www.sevenbridges.com/'
 id: gatk_base_recalibration_print_reads
 
+requirements:
+  - class: InlineJavascriptRequirement
+  - class: DockerRequirement
+    dockerPull: cnag/gatk:3.6-0
+  - class: InitialWorkDirRequirement
+    listing:
+      - entry: $(inputs.reference_genome)
+      - entry: $(inputs.dict)
+      - entry: $(inputs.br_model)
+hints:
+  - class: ResourceRequirement
+    coresMin: 8
+    ramMin: 8000
+    outdirMin: 7500
+    tmpdirMin: 7700
+
 baseCommand:
   - gatk
   - '-T'
   - PrintReads
+
 inputs:
   - id: reference_genome
     type: File
@@ -52,13 +69,3 @@ outputs:
       - ^.bai
 label: gatk-base_recalibration_print_reads
 
-requirements:
-  - class: InlineJavascriptRequirement
-  - class: DockerRequirement
-    dockerPull: cnag/gatk:3.6-0
-hints:
-  - class: ResourceRequirement
-    coresMin: 8
-    ramMin: 8000
-    outdirMin: 7500
-    tmpdirMin: 7700

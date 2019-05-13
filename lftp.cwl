@@ -9,7 +9,15 @@ hints:
     dockerPull: jlaitinen/lftpalpine
   - class: MultipleInputFeatureRequirement
   - class: InitialWorkDirRequirement
-    listing: $(inputs.files_to_send[0]+","+inputs.files_to_send[1])
+    listing: ${
+        var r = [];
+        for (var i=0; i < inputs.files_to_send.length; i++) {
+          r.push(inputs.files_to_send[i]);
+        }
+        r.push(inputs.gvcf);
+        return r; 
+      }
+# $(inputs.files_to_send[0]+","+inputs.files_to_send[1])
   - class: ResourceRequirement
     coresMin: 4
     ramMin: 8000
@@ -25,6 +33,12 @@ inputs:
     type:
       type: array
       items: File
+  - id: gvcf
+    type: File
+    secondaryFiles:
+      - .idx
+#      - .tbi
+
 #      inputBinding:
 #        valueFrom: $(self.basename)
 outputs:

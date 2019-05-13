@@ -3,12 +3,12 @@
 # also .fai and .dict needed
 reference_sequence:
   class: File
-  path: /mnt/data/input/hs37d5.fa
+  path: /mnt/input/hs37d5.fa
 
 # recalibrated BAM -I and .bai
 input:
   class: File
-  path: /mnt/data/input/aln.sorted.dedup.realigned.recalibrated.bam
+  path: /mnt/input/aln.sorted.dedup.realigned.recalibrated.bam
 
 # -L string
 chromosome: '1' 

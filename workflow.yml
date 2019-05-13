@@ -8,13 +8,19 @@ curl_fastq_urls:
 curl_reference_genome_url:
   class: File
   path: http://86.50.168.37:8000/reference_seq_url.txt
-curl_indels_url:
+curl_known_indels_url:
   class: File
-  path: http://86.50.168.37:8000/indels_url.txt
+  path: http://86.50.168.37:8000/known_indels_url.txt
+curl_known_sites_url:
+  class: File
+  path: http://86.50.168.37:8000/known_sites_url.txt
+lftp_out_conf:
+  class: File
+  path: http://86.50.168.37:8000/lftp.txt
 # DEBUG
-#trimmed_fastq:
-#  class: File
-#  path: /mnt/data/input/U5c_CCGTCC_L001_R1_001.fastq.gz.trimmed.fastq.gz
+trimmed_fastq:
+  class: File
+  path: /mnt/input/U5c_CCGTCC_L001_R1_001.fastq.gz.trimmed.fastq.gz
 reference_genome: 
   class: File
   path: /mnt/input/hs37d5.fa  

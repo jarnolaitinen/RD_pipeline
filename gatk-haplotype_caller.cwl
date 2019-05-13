@@ -3,10 +3,27 @@ class: CommandLineTool
 $namespaces:
   sbg: 'https://www.sevenbridges.com/'
 id: gatk_haplotypecaller
+
+requirements:
+  - class: InlineJavascriptRequirement
+  - class: DockerRequirement
+    dockerPull: cnag/gatk:3.6-0
+  - class: InitialWorkDirRequirement
+    listing:
+      - entry: $(inputs.reference_genome)
+      - entry: $(inputs.dict)
+hints:
+  - class: ResourceRequirement
+    coresMin: 8
+    ramMin: 8000
+    outdirMin: 7500
+    tmpdirMin: 7700
+
 baseCommand:
   - gatk
   - '-T'
   - HaplotypeCaller
+
 inputs:
   - id: reference_genome
     type: File
@@ -64,22 +81,16 @@ arguments:
   - position: 0
     prefix: '-o'
     valueFrom: $(inputs.input.nameroot).gvcf
+
 outputs:
   - id: gvcf
     type: File
     outputBinding:
-      glob: $(inputs.input.nameroot).gvcf
+      glob: "*.gvcf"
+      # $(inputs.input.nameroot).gvcf
     secondaryFiles:
-      - .tbi
+      - .idx
+      # - .tbi
 label: gatk3-haplotypecaller
 
-requirements:
-  - class: InlineJavascriptRequirement
-  - class: DockerRequirement
-    dockerPull: cnag/gatk:3.6-0
-hints:
-  - class: ResourceRequirement
-    coresMin: 8
-    ramMin: 8000
-    outdirMin: 7500
-    tmpdirMin: 7700
+

@@ -4,6 +4,22 @@ $namespaces:
   sbg: 'https://www.sevenbridges.com/'
 id: gatk-base_recalibration
 
+requirements:
+  - class: InlineJavascriptRequirement
+  - class: DockerRequirement
+    dockerPull: cnag/gatk:3.6-0
+  - class: InitialWorkDirRequirement
+    listing:
+      - entry: $(inputs.reference_genome)
+      - entry: $(inputs.dict)
+    #  - entry: $(inputs.known_sites[0])
+hints:
+  - class: ResourceRequirement
+    coresMin: 8
+    ramMin: 8000
+    outdirMin: 7500
+    tmpdirMin: 7700
+
 baseCommand:
   - gatk
   - '-T'
@@ -11,7 +27,6 @@ baseCommand:
 
 inputs:
   - id: reference_genome
- #   type: File[]
     type: File
     inputBinding:
       position: 1
@@ -19,6 +34,8 @@ inputs:
     secondaryFiles:
       - .fai
   - id: dict
+    type: File
+  - id: unzipped_known_sites_file
     type: File
   # from gatk ir
   - id: input
@@ -28,36 +45,37 @@ inputs:
       prefix: '-I'
     secondaryFiles:
       - ^.bai
-  # downloaded indels vcf
-  - id: known_sites
-    type:
-      - File[]
-    inputBinding:
-      position: 4
-      prefix: '--knownSites'
+  - id: known_indels_file
+    type: File
+
 arguments:
   - position: 0
     prefix: '-dt'
     valueFrom: NONE
+  - position: 0
+    prefix: '--knownSites'
+    valueFrom: $(inputs.known_indels_file)
+#    valueFrom: |
+#      ${
+#        var r = [];
+#        r.push(inputs.known_indels_file);
+#        r.push(" --knownSites ");
+#        r.push(inputs.unzipped_known_sites_file);
+#        return r;
+#      }
+  - position: 0
+    prefix: '--knownSites'
+    valueFrom: $(inputs.unzipped_known_sites_file)
+   
   - position: 3
     prefix: '-o'
     valueFrom: $(inputs.input.nameroot).br_model
-
 outputs:
   - id: br_model
     type: File
     outputBinding:
-      glob: $(inputs.input.nameroot).br_model
+      glob: "*.br_model"
+    # $(inputs.input.nameroot).br_model
 label: gatk3-base_recalibration
 
-requirements:
-  - class: InlineJavascriptRequirement
-  - class: DockerRequirement
-    dockerPull: cnag/gatk:3.6-0
-hints:
-  - class: ResourceRequirement
-    coresMin: 8
-    ramMin: 8000
-    outdirMin: 7500
-    tmpdirMin: 7700
 
