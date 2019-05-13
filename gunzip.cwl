@@ -12,6 +12,8 @@ requirements:
 #    dockerPull: ubuntu:xenial
     dockerPull: jlaitinen/lftpalpine
   - class: ResourceRequirement
+    coresMin: 2
+    ramMin: 2000
     outdirMin: 7500
     tmpdirMin: 7500
 
