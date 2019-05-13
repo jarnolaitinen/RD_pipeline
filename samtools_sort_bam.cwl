@@ -11,7 +11,6 @@ requirements:
   - class: InlineJavascriptRequirement
   - class: DockerRequirement
     dockerPull: biocontainers/samtools:1.3.1
-hints:
   - class: ResourceRequirement
     coresMin: 8
     ramMin: 8000

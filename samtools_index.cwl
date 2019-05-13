@@ -14,8 +14,6 @@ requirements:
   - class: InitialWorkDirRequirement
     listing: 
       - entry: $(inputs.input)
-       
-hints:
   - class: ResourceRequirement
     coresMin: 8
     ramMin: 8000

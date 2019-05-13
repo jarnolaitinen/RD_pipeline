@@ -10,8 +10,8 @@ requirements:
   - class: ResourceRequirement
     coresMin: 2
     ramMin: 2000
-    tmpdirMin: 7500
-    outdirMin: 7500  
+    tmpdirMin: 500
+    outdirMin: 500  
       
 inputs:
   curl_config_file:
