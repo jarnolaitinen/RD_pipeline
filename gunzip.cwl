@@ -11,6 +11,9 @@ requirements:
   - class: DockerRequirement
 #    dockerPull: ubuntu:xenial
     dockerPull: jlaitinen/lftpalpine
+  - class: ResourceRequirement
+    outdirMin: 7500
+    tmpdirMin: 7500
 
 inputs:
   - id: reference_file
