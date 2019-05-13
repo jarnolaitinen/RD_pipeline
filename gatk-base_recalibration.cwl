@@ -12,8 +12,6 @@ requirements:
     listing:
       - entry: $(inputs.reference_genome)
       - entry: $(inputs.dict)
-    #  - entry: $(inputs.known_sites[0])
-hints:
   - class: ResourceRequirement
     coresMin: 8
     ramMin: 8000

@@ -8,7 +8,6 @@ requirements:
   - class: InitialWorkDirRequirement
     listing:
       - entry: $(inputs.reference_genome) 
-#hints:
   - class: ResourceRequirement
     ramMin: 20000   
     coresMin: 10

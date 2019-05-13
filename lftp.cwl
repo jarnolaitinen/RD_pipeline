@@ -4,7 +4,6 @@ class: CommandLineTool
 doc: "transfer file passed from the previous task to the remote ftp server"
 requirements:
   - class: InlineJavascriptRequirement 
-hints:
   - class: DockerRequirement
     dockerPull: jlaitinen/lftpalpine
   - class: MultipleInputFeatureRequirement
@@ -17,7 +16,6 @@ hints:
         r.push(inputs.gvcf);
         return r; 
       }
-# $(inputs.files_to_send[0]+","+inputs.files_to_send[1])
   - class: ResourceRequirement
     coresMin: 4
     ramMin: 8000

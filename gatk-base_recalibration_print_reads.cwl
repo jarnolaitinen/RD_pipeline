@@ -13,7 +13,6 @@ requirements:
       - entry: $(inputs.reference_genome)
       - entry: $(inputs.dict)
       - entry: $(inputs.br_model)
-hints:
   - class: ResourceRequirement
     coresMin: 8
     ramMin: 8000

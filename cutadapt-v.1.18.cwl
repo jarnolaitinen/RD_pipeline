@@ -45,12 +45,7 @@ outputs:
       glob: '*.trimmed.fastq.gz'
 label: cutadapt
 requirements:
-#  - class: ScatterFeatureRequirement
   - class: InlineJavascriptRequirement
-#  - class: InitialWorkDirRequirement
-#    listing: 
-#      - $(inputs.raw_sequences)
-hints:
   - class: DockerRequirement
     dockerPull: 'cnag/cutadapt:1.18'   
   - class: ResourceRequirement

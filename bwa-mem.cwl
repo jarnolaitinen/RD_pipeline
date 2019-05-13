@@ -11,7 +11,6 @@ requirements:
   - class: MultipleInputFeatureRequirement
   - class: DockerRequirement
     dockerPull: cnag/bwa:0.7.17
-hints:
   - class: ResourceRequirement
     coresMin: 8
     ramMin: 20000

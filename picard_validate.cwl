@@ -11,8 +11,7 @@ requirements:
   - class: InlineJavascriptRequirement
   - class: DockerRequirement
     dockerPull: cnag/picard:2.18.25
-hints:
-  - class: ResourceRequirement
+ - class: ResourceRequirement
     coresMin: 8
     ramMin: 4000
     outdirMin: 7500
