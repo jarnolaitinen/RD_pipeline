@@ -11,7 +11,8 @@ requirements:
   - class: ResourceRequirement
     ramMin: 20000   
     coresMin: 10
-    outdirMin: 2500
+    outdirMin: 7500
+    tmpdirMin: 7500
 
 baseCommand:
 - bwa
