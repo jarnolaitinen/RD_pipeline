@@ -11,8 +11,8 @@ requirements:
   - class: ResourceRequirement
     coresMin: 4
     ramMin: 8000
-    outdirMin: 7500
-    tmpdirMin: 7700
+    outdirMin: 17500
+    tmpdirMin: 17700
   - class: InitialWorkDirRequirement
     listing:
       - entry: $(inputs.reference_genome)
