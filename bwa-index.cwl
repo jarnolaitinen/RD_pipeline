@@ -9,8 +9,8 @@ requirements:
     listing:
       - entry: $(inputs.reference_genome) 
   - class: ResourceRequirement
-    ramMin: 20000   
-    coresMin: 10
+    ramMin: 60000   
+    coresMin: 16
     outdirMin: 10500
     tmpdirMin: 10500
 
