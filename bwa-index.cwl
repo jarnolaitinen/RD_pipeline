@@ -9,10 +9,13 @@ requirements:
     listing:
       - entry: $(inputs.reference_genome) 
   - class: ResourceRequirement
-    ramMin: 60000   
-    coresMin: 16
     outdirMin: 10500
     tmpdirMin: 10500
+
+hints:
+  - class: ResourceRequirement
+    ramMin: 30000   
+    coresMin: 10
 
 baseCommand:
 - bwa
@@ -48,7 +51,6 @@ outputs:
       - .bwt
       - .pac
       - .sa
-# $(inputs.reference_genome)
 
 
 

@@ -12,10 +12,12 @@ requirements:
   - class: DockerRequirement
     dockerPull: cnag/bwa:0.7.17
   - class: ResourceRequirement
-    coresMin: 16
-    ramMin: 40000
     outdirMin: 10500
     tmpdirMin: 10700
+hints:
+  - class: ResourceRequirement
+    coresMin: 10
+    ramMin: 40000
  
 inputs:
 #  - id: bwa_output_filename
@@ -50,9 +52,10 @@ inputs:
       prefix: -R
       
 stdout: $(inputs.trimmed_fastq.nameroot).sam
-#arguments:
-#   -  valueFrom: '@RG\tID:Seq01p\tSM:Seq01\tPL:ILLUMINA\tPI:330' 
-#      prefix: -R
+arguments:
+  - position: 2
+    prefix: -M
+  
 outputs:
   - id: aligned_sam
     type: File
