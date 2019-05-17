@@ -10,12 +10,13 @@ requirements:
   - class: InlineJavascriptRequirement
   - class: DockerRequirement
     dockerPull: jlaitinen/lftpalpine
+  - class: ResourceRequirement
+    outdirMin: 7500
+    tmpdirMin: 7500
 hints:
   - class: ResourceRequirement
     coresMin: 2
     ramMin: 5000
-    outdirMin: 7500
-    tmpdirMin: 7500
 
 inputs:
   - id: reference_file
