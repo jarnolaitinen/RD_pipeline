@@ -25,6 +25,7 @@ inputs:
 outputs:
   - id: unzipped_fasta
     type: stdout
+    streamable: true
     #outputBinding:
     #  glob: ".fa"
 stdout: $(inputs.reference_file[0].nameroot)
