@@ -10,6 +10,7 @@ requirements:
   - class: InlineJavascriptRequirement
   - class: DockerRequirement
     dockerPull: jlaitinen/lftpalpine
+hints:
   - class: ResourceRequirement
     coresMin: 2
     ramMin: 5000
