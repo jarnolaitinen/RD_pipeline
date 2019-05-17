@@ -4,14 +4,15 @@ baseCommand: ["curl"]
 
 doc: "transfer file from a remote FTP/HTTP server to the TES"
 requirements:
-#  - class: InlineJavascriptRequirement
   - class: DockerRequirement
     dockerPull: jlaitinen/lftpalpine
   - class: ResourceRequirement
-    coresMin: 2
-    ramMin: 2000
     tmpdirMin: 2500
     outdirMin: 2500  
+hints:
+  - class: ResourceRequirement
+    coresMin: 2
+    ramMin: 2000
       
 inputs:
   curl_config_file:
@@ -24,6 +25,7 @@ inputs:
 outputs:
   known_sites_file:
     type: File
+    streaming: true
     outputBinding:
       glob: "*.gz"
  
