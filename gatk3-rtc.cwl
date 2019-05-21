@@ -9,8 +9,6 @@ requirements:
   - class: DockerRequirement
     dockerPull: cnag/gatk:3.6-0
   - class: ResourceRequirement
-    coresMin: 4
-    ramMin: 8000
     outdirMin: 17500
     tmpdirMin: 17700
   - class: InitialWorkDirRequirement
@@ -18,6 +16,11 @@ requirements:
       - entry: $(inputs.reference_genome)
       - entry: $(inputs.dict)
       - entry: $(inputs.known_indels)
+hints:
+  - class: ResourceRequirement
+    coresMin: 4
+    ramMin: 8000
+
 baseCommand:
   - gatk
   - '-T'

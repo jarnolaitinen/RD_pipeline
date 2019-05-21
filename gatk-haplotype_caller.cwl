@@ -13,10 +13,12 @@ requirements:
       - entry: $(inputs.reference_genome)
       - entry: $(inputs.dict)
   - class: ResourceRequirement
-    coresMin: 8
-    ramMin: 8000
     outdirMin: 7500
     tmpdirMin: 7700
+hints:
+  - class: ResourceRequirement
+    coresMin: 8
+    ramMin: 8000
 
 baseCommand:
   - gatk
