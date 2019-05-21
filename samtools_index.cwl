@@ -15,10 +15,12 @@ requirements:
     listing: 
       - entry: $(inputs.input)
   - class: ResourceRequirement
-    coresMin: 8
-    ramMin: 8000
     outdirMin: 7500
     tmpdirMin: 7700
+hints:
+  - class: ResourceRequirement
+    coresMin: 8
+    ramMin: 8000
 
 inputs:
   - id: input

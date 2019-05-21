@@ -12,10 +12,13 @@ requirements:
   - class: DockerRequirement
     dockerPull: cnag/picard:2.18.25
   - class: ResourceRequirement
-    coresMin: 8
-    ramMin: 4000
     outdirMin: 7500
     tmpdirMin: 7700
+
+hints:
+  - class: ResourceRequirement
+    coresMin: 8
+    ramMin: 4000
 
 inputs:
   input:
