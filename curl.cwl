@@ -25,7 +25,6 @@ inputs:
 outputs:
   in_files:
     type: File[]
-    streaming: true
     outputBinding:
       glob: "*.gz"
  
