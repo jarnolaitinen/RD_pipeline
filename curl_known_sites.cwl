@@ -25,7 +25,6 @@ inputs:
 outputs:
   known_sites_file:
     type: File
-    streaming: true
     outputBinding:
       glob: "*.gz"
  
