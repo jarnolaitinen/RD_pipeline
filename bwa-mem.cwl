@@ -27,6 +27,8 @@ inputs:
     type: File
     inputBinding:
       position: 4
+      # Assume the first input query file is interleaved paired-end FASTA/Q. See the command description for details. 
+      prefix: '-p'
   - id: reference_genome
     type: File
     inputBinding:
