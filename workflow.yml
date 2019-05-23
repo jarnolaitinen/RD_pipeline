@@ -32,5 +32,6 @@ lftp_out_conf:
 
 # this is for BWA. This string was used at BSC for the same pipeline
 readgroup_str: '@RG\tID:Seq01p\tSM:Seq01\tPL:ILLUMINA\tPI:330'
+sample_name: "abc1"
 # GATK Haplotype caller sequence
-chromosome: '1'
+# chromosome: '1'
