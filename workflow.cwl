@@ -313,7 +313,8 @@ steps:
         source:
           - picard_markduplicates/output_metrics
       - id: bam
-          # BAM and bai
+        # BAM and bai
+        source:
           - gatk-base_recalibration_print_reads/bqsr_bam
       # with .tbi 
       - id: gvcf
