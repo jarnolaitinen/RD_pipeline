@@ -134,8 +134,6 @@ steps:
       - id: reference_genome
         source:
           - gunzip/unzipped_fasta
-      - id: sample_name
-        source: sampleName
       # algorith is by default  bwtsw
       # algorithm: index_algorithm
       # also blocksize could be tuned
