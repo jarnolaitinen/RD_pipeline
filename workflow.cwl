@@ -14,9 +14,11 @@ inputs:
     type: File
   - id: readgroup_str
     type: string
+  # optional:
   - id: chromosome
     type: string
-
+  - id: sample_name
+    type: string
   - id: lftp_out_conf
     type: File
 # DEBUG
@@ -39,29 +41,13 @@ inputs:
 #    'sbg:y': -641
 #  - id: rtc_intervals_name
 #    type: File
-#    'sbg:x': 275.60113525390625
-#    'sbg:y': -473.4110107421875
 #  - id: known_sites
 #    type:
 #      - File
 #      - type: array
 #        items: File
-#    'sbg:x': 360.4740905761719
-#    'sbg:y': -608.6580200195312
 outputs: []
-#  - id: output_metrics
-#    outputSource:
-#      - picard_markduplicates/output_metrics
-#    type: File
-#    'sbg:x': -26.121828079223633
-#    'sbg:y': -400.9543151855469
-#  - id: gvcf
-#    outputSource:
-#      - gatk3_haplotypecaller/gvcf
-#      - gatk3_haplotypecaller/br_model
-#    type: File
-#    'sbg:x': 1117.4185791015625
-#    'sbg:y': -162.47743225097656
+
 steps:
   # if the file is publicly available, curl is the simplest
   - id: fastqs_in
@@ -148,6 +134,8 @@ steps:
       - id: reference_genome
         source:
           - gunzip/unzipped_fasta
+      - id: sample_name
+        source: sampleName
       # algorith is by default  bwtsw
       # algorithm: index_algorithm
       # also blocksize could be tuned
@@ -162,7 +150,6 @@ steps:
       - id: input
         source:
           - gunzip/unzipped_fasta
-#          - reference_genome
     # produces .fai
     out:
       - id: index_fai
@@ -176,15 +163,16 @@ steps:
       - id: trimmed_fastq
         source:
          - cutadapt2/trimmed_fastq
-    #      - trimmed_fastq
       - id: read_group
         source:
           - readgroup_str
+      - id: sample_name
+        source:
+          - sample_name
       # this includes also many secondaryFiles too
       - id: reference_genome
         source:
           - bwa_index/output
-       #   - reference_genome
     # output is a SAM file
     out:
       - id: aligned_sam
@@ -273,7 +261,7 @@ steps:
         source:
           - known_indels_in/known_indels_file
     out:
-      - id: br_model 
+      - id: br_model
     run: gatk-base_recalibration.cwl
     label: gatk-base_recalibration
 
@@ -292,7 +280,7 @@ steps:
         source:
           - gatk-base_recalibration/br_model
     out:
-      - id: recalibrated_bam
+      - id: bqsr_bam
     run: gatk-base_recalibration_print_reads.cwl
     label: gatk-base_recalibration_print_reads
 
@@ -307,7 +295,7 @@ steps:
           - picard_dictionary/dict
       - id: input
         source:
-          - gatk-base_recalibration_print_reads/recalibrated_bam
+          - gatk-base_recalibration_print_reads/bqsr_bam
       - id: chromosome
         source: 
           - chromosome
@@ -315,6 +303,8 @@ steps:
       - id: gvcf
     run: gatk-haplotype_caller.cwl
     label: gatk-haplotype_caller
+
+  # indexes and alignment too
   - id: lftp_out
     in: 
       - id: lftp_out_conf
@@ -322,7 +312,10 @@ steps:
       - id: files_to_send
         source:
           - picard_markduplicates/output_metrics
-          - gatk-base_recalibration/br_model
+      - id: bam
+          # BAM and bai
+          - gatk-base_recalibration_print_reads/bqsr_bam
+      # with .tbi 
       - id: gvcf
         source:      
           - gatk_haplotype_caller/gvcf
