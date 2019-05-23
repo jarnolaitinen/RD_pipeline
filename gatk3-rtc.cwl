@@ -1,7 +1,5 @@
 class: CommandLineTool
 cwlVersion: v1.0
-$namespaces:
-  sbg: 'https://www.sevenbridges.com/'
 id: rtc
 
 requirements:
@@ -9,8 +7,8 @@ requirements:
   - class: DockerRequirement
     dockerPull: cnag/gatk:3.6-0
   - class: ResourceRequirement
-    outdirMin: 17500
-    tmpdirMin: 17700
+    outdirMin: 12500
+    tmpdirMin: 12500
   - class: InitialWorkDirRequirement
     listing:
       - entry: $(inputs.reference_genome)
