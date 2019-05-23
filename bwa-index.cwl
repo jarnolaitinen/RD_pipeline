@@ -14,8 +14,8 @@ requirements:
 
 hints:
   - class: ResourceRequirement
-    ramMin: 30000   
-    coresMin: 10
+    ramMin: 4000   
+    coresMin: 1
 
 baseCommand:
 - bwa
@@ -51,6 +51,4 @@ outputs:
       - .bwt
       - .pac
       - .sa
-
-
 
