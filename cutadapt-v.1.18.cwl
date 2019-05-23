@@ -9,10 +9,12 @@ requirements:
   - class: DockerRequirement
     dockerPull: 'cnag/cutadapt:1.18'
   - class: ResourceRequirement
-    coresMin: 16
-    ramMin: 44000
     outdirMin: 2500
     tmpdirMin: 2500
+hints:
+  - class: ResourceRequirement
+    coresMin: 4
+    ramMin: 4000
 
 baseCommand: [cutadapt, --interleaved]
 arguments: 
