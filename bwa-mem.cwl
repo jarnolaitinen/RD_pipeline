@@ -16,8 +16,8 @@ requirements:
     tmpdirMin: 10700
 hints:
   - class: ResourceRequirement
-    coresMin: 10
-    ramMin: 40000
+    coresMin: 4
+    ramMin: 4000
  
 inputs:
 #  - id: bwa_output_filename
@@ -39,6 +39,8 @@ inputs:
       - .bwt
       - .pac
       - .sa
+  - id: sample_name
+    type: string
   - id: threads
     type: int?
     default: 2
@@ -53,7 +55,7 @@ inputs:
       position: 2
       prefix: -R
       
-stdout: $(inputs.trimmed_fastq.nameroot).sam
+stdout: $(inputs.sample_name).sam
 arguments:
   - position: 2
     prefix: -M
