@@ -1,7 +1,5 @@
 cwlVersion: v1.0
 class: CommandLineTool
-$namespaces:
-  sbg: 'https://www.sevenbridges.com/'
 id: gatk_base_recalibration_print_reads
 
 requirements:
@@ -37,7 +35,6 @@ inputs:
       - .fai
   - id: dict
     type: File
-  # from gatk-ir.cwl
   - id: input
     type:
       - File
@@ -46,7 +43,6 @@ inputs:
       prefix: '-I'
     secondaryFiles:
       - ^.bai
-  # from gatk-base_recalibration.cwl
   - id: br_model
     type:
       - File
@@ -57,16 +53,17 @@ inputs:
 arguments:
   - position: 0
     prefix: '-dt'
-    valueFrom: NONE
+    valueFrom: 'NONE'
   - position: 3
     prefix: '-o'
-    valueFrom: $(inputs.input.nameroot).recalibrated.bam
+    valueFrom: $(inputs.input.nameroot).bqsr.bam
 
 outputs:
-  - id: recalibrated_bam
+  - id: bqsr_bam
     type: File
     outputBinding:
-      glob: $(inputs.input.nameroot).recalibrated.bam
+       glob: $(inputs.input.nameroot).bqsr.bam
+ #      glob: "*.bam"
     secondaryFiles:
       - ^.bai
 label: gatk-base_recalibration_print_reads

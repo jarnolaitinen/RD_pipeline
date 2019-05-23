@@ -1,7 +1,5 @@
 cwlVersion: v1.0
 class: CommandLineTool
-$namespaces:
-  sbg: 'https://www.sevenbridges.com/'
 id: gatk-base_recalibration
 
 requirements:
@@ -16,10 +14,9 @@ requirements:
     outdirMin: 7500
     tmpdirMin: 7700
 
-
 hints:
   - class: ResourceRequirement
-    coresMin: 8
+    coresMin: 4
     ramMin: 8000
 
 baseCommand:
@@ -54,6 +51,7 @@ arguments:
   - position: 0
     prefix: '-dt'
     valueFrom: NONE
+
   - position: 0
     prefix: '--knownSites'
     valueFrom: $(inputs.known_indels_file)
@@ -79,5 +77,4 @@ outputs:
       glob: "*.br_model"
     # $(inputs.input.nameroot).br_model
 label: gatk3-base_recalibration
-
 

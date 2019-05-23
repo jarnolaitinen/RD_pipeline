@@ -17,7 +17,7 @@ requirements:
 
 hints:
   - class: ResourceRequirement
-    coresMin: 8
+    coresMin: 4
     ramMin: 4000
 
 inputs:
@@ -31,10 +31,10 @@ inputs:
 #      - ^.bai
 
 arguments:
-  - position: 0
-    prefix: OPTICAL_DUPLICATE_PIXEL_DISTANCE=
-    valueFrom: '100'
-    separate: false
+#  - position: 0
+#    prefix: OPTICAL_DUPLICATE_PIXEL_DISTANCE=
+#    valueFrom: '100'
+#    separate: false
   - position: 0
     prefix: TAGGING_POLICY=
     valueFrom: 'All'
@@ -53,18 +53,18 @@ arguments:
     separate: false
   - position: 1
     prefix: METRICS_FILE=
-    valueFrom: $(inputs.input.nameroot).dedup.metrics.txt
+    valueFrom: $(inputs.input.nameroot).metrics.txt
     separate: false
   - position: 3
     prefix: OUTPUT=
-    valueFrom: $(inputs.input.nameroot).dedup.bam
+    valueFrom: $(inputs.input.nameroot).md.bam
     separate: false
 
 outputs:
   - id: md_bam
     type: File
     outputBinding:
-      glob: '*.dedup.bam'
+      glob: '*.md.bam'
     secondaryFiles:
      - ^.bai
   - id: output_metrics

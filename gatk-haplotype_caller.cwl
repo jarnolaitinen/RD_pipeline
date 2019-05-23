@@ -1,7 +1,5 @@
 cwlVersion: v1.0
 class: CommandLineTool
-$namespaces:
-  sbg: 'https://www.sevenbridges.com/'
 id: gatk_haplotypecaller
 
 requirements:
@@ -17,8 +15,8 @@ requirements:
     tmpdirMin: 7700
 hints:
   - class: ResourceRequirement
-    coresMin: 8
-    ramMin: 8000
+    coresMin: 4
+    ramMin: 4000
 
 baseCommand:
   - gatk
@@ -35,7 +33,7 @@ inputs:
       - .fai
   - id: dict
     type: File
-# from gatk-base_recalibration_print_reads.cwl
+  # from gatk-base_recalibration_print_reads.cwl
   - id: input
     type: File
     inputBinding:
@@ -43,17 +41,12 @@ inputs:
       prefix: '-I'
     secondaryFiles:
       - ^.bai
+  # default is to analyse the complete genome
   - id: chromosome
-    type: string
+    type: string?
     inputBinding:
       position: 3
       prefix: '-L'
-#  - id: output_filename
-#    type: string
-#    inputBinding:
-#      position: 4
-#      prefix: '-o'
-#  - 'sbg:toolDefaultValue': '2'
   - id: ploidy
     type: int?
     inputBinding:
@@ -62,11 +55,17 @@ inputs:
 
 arguments:
   - position: 0
+    prefix: '--num_cpu_threads_per_data_thread'
+    valueFrom: '4' 
+  - position: 0
     prefix: '-dt'
     valueFrom: 'NONE'
   - position: 0
     prefix: '-rf'
     valueFrom: 'BadCigar'
+  - position: 0
+    prefix: '-GQB'
+    valueFrom: '[20, 25, 30, 35, 40, 45, 50, 70, 90, 99]'
   - position: 0
     prefix: '-ERC'
     valueFrom: 'GVCF'
@@ -88,7 +87,6 @@ outputs:
     type: File
     outputBinding:
       glob: "*.gvcf"
-      # $(inputs.input.nameroot).gvcf
     secondaryFiles:
       - .idx
       # - .tbi
