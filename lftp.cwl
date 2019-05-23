@@ -14,11 +14,12 @@ requirements:
           r.push(inputs.files_to_send[i]);
         }
         r.push(inputs.gvcf);
+        r.push(inputs.bam);
         return r; 
       }
   - class: ResourceRequirement
-    coresMin: 4
-    ramMin: 8000
+    coresMin: 1 
+    ramMin: 2000
     outdirMin: 7200
     
 inputs:
@@ -31,11 +32,15 @@ inputs:
     type:
       type: array
       items: File
+  - id: bam
+    type: File
+    secondaryFiles: 
+      - .bai
   - id: gvcf
     type: File
     secondaryFiles:
       - .idx
-#      - .tbi
+      - .tbi
 
 #      inputBinding:
 #        valueFrom: $(self.basename)
