@@ -5,7 +5,8 @@ $namespaces:
 baseCommand:
   - bwa
   - mem
-
+  - -M
+  - -p 
 requirements:
   - class: InlineJavascriptRequirement
   - class: MultipleInputFeatureRequirement
@@ -28,7 +29,6 @@ inputs:
     inputBinding:
       position: 4
       # Assume the first input query file is interleaved paired-end FASTA/Q. See the command description for details. 
-      prefix: '-p'
   - id: reference_genome
     type: File
     inputBinding:
@@ -59,7 +59,9 @@ stdout: $(inputs.sample_name).sam
 arguments:
   - position: 2
     prefix: -M
-  
+  - position: 2
+    prefix: -p
+ 
 outputs:
   - id: aligned_sam
     type: File
