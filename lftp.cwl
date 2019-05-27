@@ -39,8 +39,8 @@ inputs:
   - id: gvcf
     type: File
     secondaryFiles:
-      - .idx
-#      - .tbi
+#      - .idx
+      - .tbi
 
 #      inputBinding:
 #        valueFrom: $(self.basename)
