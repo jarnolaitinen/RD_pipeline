@@ -35,12 +35,12 @@ inputs:
   - id: bam
     type: File
     secondaryFiles: 
-      - .bai
+      - ^.bai
   - id: gvcf
     type: File
     secondaryFiles:
       - .idx
-      - .tbi
+#      - .tbi
 
 #      inputBinding:
 #        valueFrom: $(self.basename)
