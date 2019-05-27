@@ -14,8 +14,8 @@ inputs:
     type: File
   - id: readgroup_str
     type: string
-  - id: chromosome
-    type: string
+#  - id: chromosome
+#    type: string
   - id: sample_name
     type: string
   - id: lftp_out_conf
@@ -240,9 +240,9 @@ steps:
       - id: input
         source:
           - gatk-base_recalibration_print_reads/bqsr_bam
-      - id: chromosome
-        source: 
-          - chromosome
+#      - id: chromosome
+#        source: 
+#          - chromosome
     out:
       - id: gvcf
     run: gatk-haplotype_caller.cwl
