@@ -42,11 +42,11 @@ inputs:
     secondaryFiles:
       - ^.bai
   # default is to analyse the complete genome
-  - id: chromosome
-    type: string?
-    inputBinding:
-      position: 3
-      prefix: '-L'
+#  - id: chromosome
+#    type: string?
+#    inputBinding:
+#      position: 3
+#      prefix: '-L'
   - id: ploidy
     type: int?
     inputBinding:
@@ -58,7 +58,7 @@ inputs:
 arguments:
   - position: 0
     prefix: '--num_cpu_threads_per_data_thread'
-    valueFrom: '4' 
+    valueFrom: '6' 
   - position: 0
     prefix: '-dt'
     valueFrom: 'NONE'
@@ -90,16 +90,16 @@ arguments:
     valueFrom: '128000'
   - position: 0
     prefix: '-o'
-    valueFrom: $(inputs.input.nameroot).gvcf
+    valueFrom: $(inputs.input.nameroot).vcf.gz
 
 outputs:
   - id: gvcf
     type: File
     outputBinding:
-      glob: "*.gvcf"
+      glob: "*.gz"
     secondaryFiles:
-      - .idx
-      # - .tbi
+      #- .idx
+      - .tbi
 label: gatk3-haplotypecaller
 
 
