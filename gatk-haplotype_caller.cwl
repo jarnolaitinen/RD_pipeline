@@ -52,7 +52,9 @@ inputs:
     inputBinding:
       position: 5
       prefix: '-ploidy'
-
+  - id: gqb
+    type: string?
+    default: "20, 25, 30, 35, 40, 45, 50, 70, 90, 99"
 arguments:
   - position: 0
     prefix: '--num_cpu_threads_per_data_thread'
@@ -64,8 +66,16 @@ arguments:
     prefix: '-rf'
     valueFrom: 'BadCigar'
   - position: 0
-    prefix: '-GQB'
-    valueFrom: '[20, 25, 30, 35, 40, 45, 50, 70, 90, 99]'
+#    prefix: '-GQB'
+    valueFrom: |
+      ${
+        var r = [];
+        var stuff = inputs.gqb.split(','); 
+        for (var i=0; i<stuff.length ; i++ ) {
+          r.push("-GQB "+stuff[i]);
+        } 
+        return r;
+      }
   - position: 0
     prefix: '-ERC'
     valueFrom: 'GVCF'

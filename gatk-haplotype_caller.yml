@@ -1,14 +1,16 @@
 # Reference genome
 # -R 
 # also .fai and .dict needed
-reference_sequence:
+reference_genome:
   class: File
   path: /mnt/input/hs37d5.fa
-
+dict:
+  class: File
+  path: /mnt/input/hs37d5.dict
 # recalibrated BAM -I and .bai
 input:
   class: File
-  path: /mnt/input/aln.sorted.dedup.realigned.recalibrated.bam
+  path: /mnt/input/abc2.sorted.md.realigned.bqsr.bam
 
 # -L string
 chromosome: '1' 
