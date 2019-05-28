@@ -1,4 +1,4 @@
 sam:
   class: File
-  path:  /mnt/data/input/aln.sam
+  path:  /mnt/input/abc1.sam
 

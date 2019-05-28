@@ -1,4 +1,4 @@
 reference_genome:
   class: File
-  path:  /mnt/data/input/hs37d5.fa
+  path:  /mnt/input/hs37d5.fa
 

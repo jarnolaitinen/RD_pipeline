@@ -1,7 +1,5 @@
 class: CommandLineTool
 cwlVersion: v1.0
-$namespaces:
-  sbg: 'https://www.sevenbridges.com/'
 id: picard_markduplicates
 baseCommand:
   - picard
@@ -16,8 +14,8 @@ requirements:
     tmpdirMin: 7700
 hints:
   - class: ResourceRequirement
-    coresMin: 14
-    ramMin: 13000
+    coresMin: 4
+    ramMin: 4000
 
 inputs:
   - id: reference_genome

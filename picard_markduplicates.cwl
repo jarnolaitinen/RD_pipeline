@@ -1,7 +1,5 @@
 class: CommandLineTool
 cwlVersion: v1.0
-$namespaces:
-  sbg: 'https://www.sevenbridges.com/'
 id: picard_markduplicates
 baseCommand:
   - picard
@@ -27,14 +25,12 @@ inputs:
       position: 2
       prefix: INPUT=
       separate: false
-#    secondaryFiles:
-#      - ^.bai
 
 arguments:
-#  - position: 0
-#    prefix: OPTICAL_DUPLICATE_PIXEL_DISTANCE=
-#    valueFrom: '100'
-#    separate: false
+  - position: 0
+    prefix: OPTICAL_DUPLICATE_PIXEL_DISTANCE=
+    valueFrom: '100'
+    separate: false
   - position: 0
     prefix: TAGGING_POLICY=
     valueFrom: 'All'
@@ -47,6 +43,11 @@ arguments:
     prefix: REMOVE_DUPLICATES=
     valueFrom: 'true'
     separate: false
+  - position: 0
+    prefix: TAG_DUPLICATE_SET_MEMBERS=
+    valueFrom: 'true'
+    separate: false
+
   - position: 0
     prefix: ASSUME_SORT_ORDER=
     valueFrom: 'coordinate'

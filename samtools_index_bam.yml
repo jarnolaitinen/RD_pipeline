@@ -1,5 +1,5 @@
 # from BWA mem
 input:
   class: File
-  path: /mnt/data/input/undefined.sorted.bam
+  path: /mnt/input/abc1.sorted.bam
 threads: 8
