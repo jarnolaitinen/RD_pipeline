@@ -57,8 +57,8 @@ inputs:
       
 stdout: $(inputs.sample_name).sam
 arguments:
-#  - position: 2
-#    prefix: -M
+  - position: 2
+    prefix: -M
   - position: 2
     prefix: -p
  
