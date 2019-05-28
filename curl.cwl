@@ -9,8 +9,8 @@ requirements:
   - class: ResourceRequirement
     tmpdirMin: 2500
     outdirMin: 2500
-#hints:
-#  - class: ResourceRequirement
+hints:
+  - class: ResourceRequirement
     coresMin: 2
     ramMin: 2000
       
