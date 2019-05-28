@@ -4,7 +4,7 @@ reference_genome:
 # -I
 input:
   class: File
-  path:  /mnt/input/U5c_CCGTCC_L001_R1_001.fastq.gz.trimmed.fastq.sorted.dedup.realigned.bam 
+  path:  /mnt/input/abc1.sorted.md.realigned.bam 
 dict:
   class: File
   path: /mnt/input/hs37d5.dict

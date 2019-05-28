@@ -6,17 +6,8 @@ label: RD_Connect
 inputs:
   - id: fastq_files
     type: File[]
-  
-  # assuming in .gz
   - id: reference_genome
     type: File[]
-    # these are produced by bwa index step
-#    secondaryFiles:
-#      - .amb
-#      - .ann
-#      - .bwt
-#      - .pac
-#      - .sa
   - id: known_indels_file
     type: File
   - id: known_sites_file
@@ -24,6 +15,8 @@ inputs:
   - id: chromosome
     type: string
   - id: readgroup_str
+    type: string
+  - id: sample_name
     type: string
 
 outputs: 
@@ -69,79 +62,65 @@ steps:
 
   - id: cutadapt2
     in:
-    # takes two FASTQ files (.gz)
       - id: raw_sequences
         source:
           - fastq_files
-    # trimmed sequence file fastq.gz
     out: 
       - id: trimmed_fastq
     run: cutadapt-v.1.18.cwl
 
   - id: bwa_index
-    # the takes the fa.gz reference genome as input
     in:
       - id: reference_genome
         source:
           - gunzip/unzipped_fasta
-      # algorith is by default  bwtsw
-      # algorithm: index_algorithm
-      # also blocksize could be tuned
-      # produced .amb, .ann, .bwt, .pac, and .sa files
     out:
       - id: output
     run: bwa-index.cwl
 
   - id: samtools_index
-    # reference genome .fa
     in:
       - id: input
         source:
           - gunzip/unzipped_fasta
-    # produces .fai
     out:
       - id: index_fai
     run: samtools_index.cwl
 
 
   - id: bwa_mem
-    # the the trimmed sequence fastq.gz, read group string 
-    # and files from the bwa index
     in:
+
+      - id: sample_name
+        source:
+          - sample_name
       - id: trimmed_fastq
         source:
          - cutadapt2/trimmed_fastq
       - id: read_group
         source:
           - readgroup_str
-      # this includes also many secondaryFiles too
       - id: reference_genome
         source:
           - bwa_index/output
-    # output is a SAM file
     out:
       - id: aligned_sam
     run: bwa-mem.cwl
 
   - id: samtools_sort
-    # sam from bwa mem
     in:
       - id: input
         source:
           - bwa_mem/aligned_sam
-    # produces sorted .bam
     out:
       - id: sorted_bam
     run: samtools_sort_bam.cwl
    
-
   - id: picard_markduplicates
-    # takes sorted bam
     in:
       - id: input
         source: 
           - samtools_sort/sorted_bam
-    # .dedup.bam and .bai and the metrics file
     out:
       - id: md_bam
       - id: output_metrics
@@ -224,7 +203,7 @@ steps:
         source:
           - gatk-base_recalibration/br_model
     out:
-      - id: recalibrated_bam
+      - id: bqsr_bam
     run: gatk-base_recalibration_print_reads.cwl
     label: gatk-base_recalibration_print_reads
 
@@ -239,7 +218,7 @@ steps:
           - picard_dictionary/dict
       - id: input
         source:
-          - gatk-base_recalibration_print_reads/recalibrated_bam
+          - gatk-base_recalibration_print_reads/bqsr_bam
       - id: chromosome
         source: 
           - chromosome

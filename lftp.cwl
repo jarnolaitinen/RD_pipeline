@@ -39,7 +39,6 @@ inputs:
   - id: gvcf
     type: File
     secondaryFiles:
-#      - .idx
       - .tbi
 
 #      inputBinding:

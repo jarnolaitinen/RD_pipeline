@@ -1,12 +1,10 @@
 input:
   class: File
-  #path: /mnt/data/input/aln.bam
-  path: /mnt/input/aln.sorted.dedup.bam
-
+  path: /mnt/input/abc1.sorted.md.bam
 rtc_intervals_name: "rtc_intervals.list"
-#dict:
-#  class: File
-#  path: /mnt/input/hs37d5.dict
+dict:
+  class: File
+  path: /mnt/input/hs37d5.dict
 reference_genome:
   class: File
   path: /mnt/input/hs37d5.fa

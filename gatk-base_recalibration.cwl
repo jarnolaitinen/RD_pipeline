@@ -17,7 +17,7 @@ requirements:
 hints:
   - class: ResourceRequirement
     coresMin: 4
-    ramMin: 8000
+    ramMin: 4000
 
 baseCommand:
   - gatk
@@ -51,7 +51,9 @@ arguments:
   - position: 0
     prefix: '-dt'
     valueFrom: NONE
-
+  - position: 0
+    prefix: '-nct'
+    valueFrom: '4'
   - position: 0
     prefix: '--knownSites'
     valueFrom: $(inputs.known_indels_file)
@@ -69,12 +71,12 @@ arguments:
    
   - position: 3
     prefix: '-o'
-    valueFrom: $(inputs.input.nameroot).br_model
+    valueFrom: $(inputs.input.nameroot).recalibrated.grp
 outputs:
   - id: br_model
     type: File
     outputBinding:
-      glob: "*.br_model"
-    # $(inputs.input.nameroot).br_model
+      glob: "*.grp"
+    # $(inputs.input.nameroot).grp
 label: gatk3-base_recalibration
 

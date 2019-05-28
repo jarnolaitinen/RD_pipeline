@@ -42,11 +42,11 @@ inputs:
     secondaryFiles:
       - ^.bai
   # default is to analyse the complete genome
-#  - id: chromosome
-#    type: string?
-#    inputBinding:
-#      position: 3
-#      prefix: '-L'
+  - id: chromosome
+    type: string?
+    inputBinding:
+      position: 3
+      prefix: '-L'
   - id: ploidy
     type: int?
     inputBinding:

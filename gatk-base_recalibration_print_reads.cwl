@@ -63,7 +63,6 @@ outputs:
     type: File
     outputBinding:
        glob: $(inputs.input.nameroot).bqsr.bam
- #      glob: "*.bam"
     secondaryFiles:
       - ^.bai
 label: gatk-base_recalibration_print_reads
