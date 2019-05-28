@@ -18,9 +18,11 @@ requirements:
         return r; 
       }
   - class: ResourceRequirement
+    outdirMin: 7200
+hints:
+  - class: ResourceRequirement
     coresMin: 1 
     ramMin: 2000
-    outdirMin: 7200
     
 inputs:
   - id: lftp_out_conf
