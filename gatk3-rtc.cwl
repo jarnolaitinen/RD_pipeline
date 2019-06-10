@@ -5,7 +5,7 @@ id: rtc
 requirements:
   - class: InlineJavascriptRequirement
   - class: DockerRequirement
-    dockerPull: cnag/gatk:3.6-0
+    dockerPull: broadinstitute/gatk3:3.6-0
   - class: ResourceRequirement
     outdirMin: 12500
     tmpdirMin: 12500
@@ -20,7 +20,9 @@ hints:
     ramMin: 8000
 
 baseCommand:
-  - gatk
+  - java
+  - -jar
+  - /usr/GenomeAnalysisTK.jar
   - '-T'
   - RealignerTargetCreator
 
@@ -32,6 +34,7 @@ inputs:
       prefix: '-I'
     secondaryFiles:
       - ^.bai
+   # must have .list
   - id: rtc_intervals_name
     type: string? 
     default: 'rtc_intervals.list'
@@ -42,7 +45,6 @@ inputs:
       prefix: '-R'
     secondaryFiles:
       - .fai
-     # - .dict
   - id: known_indels
     type: File
     inputBinding:
@@ -65,5 +67,4 @@ outputs:
     type: File
     outputBinding:
       glob: "*.list" 
- #$(inputs.rtc_intervals_name)
 label: rtc 

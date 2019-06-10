@@ -5,7 +5,7 @@ id: gatk_haplotypecaller
 requirements:
   - class: InlineJavascriptRequirement
   - class: DockerRequirement
-    dockerPull: cnag/gatk:3.6-0
+    dockerPull: broadinstitute/gatk3:3.6-0
   - class: InitialWorkDirRequirement
     listing:
       - entry: $(inputs.reference_genome)
@@ -19,10 +19,12 @@ hints:
     ramMin: 4000
 
 baseCommand:
-  - gatk
+  - java
+  - -jar
+  - /usr/GenomeAnalysisTK.jar
   - '-T'
   - HaplotypeCaller
-
+  - --never_trim_vcf_format_field
 inputs:
   - id: reference_genome
     type: File
@@ -53,12 +55,21 @@ inputs:
       position: 5
       prefix: '-ploidy'
   - id: gqb
+    type:
+      - "null"
+      - type: array
+        items: int
+        inputBinding: { prefix: "--GVCFGQBands" }
+    inputBinding:
+      position: 12
+  - id: threads
     type: string?
-    default: "20, 25, 30, 35, 40, 45, 50, 70, 90, 99"
+    default: "2"
+
 arguments:
   - position: 0
     prefix: '--num_cpu_threads_per_data_thread'
-    valueFrom: '6' 
+    valueFrom: $(inputs.threads) 
   - position: 0
     prefix: '-dt'
     valueFrom: 'NONE'
@@ -66,22 +77,8 @@ arguments:
     prefix: '-rf'
     valueFrom: 'BadCigar'
   - position: 0
-#    prefix: '-GQB'
-    valueFrom: |
-      ${
-        var r = [];
-        var stuff = inputs.gqb.split(','); 
-        for (var i=0; i<stuff.length ; i++ ) {
-          r.push("-GQB "+stuff[i]);
-        } 
-        return r;
-      }
-  - position: 0
     prefix: '-ERC'
     valueFrom: 'GVCF'
-  - position: 0
-    prefix: '--never_trim_vcf_format_field'
-    valueFrom: ''
   - position: 0
     prefix: '-variant_index_type'
     valueFrom: 'LINEAR'

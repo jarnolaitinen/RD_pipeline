@@ -5,7 +5,7 @@ id: gatk-base_recalibration
 requirements:
   - class: InlineJavascriptRequirement
   - class: DockerRequirement
-    dockerPull: cnag/gatk:3.6-0
+    dockerPull: broadinstitute/gatk3:3.6-0
   - class: InitialWorkDirRequirement
     listing:
       - entry: $(inputs.reference_genome)
@@ -20,7 +20,10 @@ hints:
     ramMin: 4000
 
 baseCommand:
-  - gatk
+#  - gatk
+  - java 
+  - -jar
+  - /usr/GenomeAnalysisTK.jar
   - '-T'
   - BaseRecalibrator
 
@@ -46,6 +49,8 @@ inputs:
       - ^.bai
   - id: known_indels_file
     type: File
+  - id: threads
+    type: string?
 
 arguments:
   - position: 0
@@ -53,7 +58,7 @@ arguments:
     valueFrom: NONE
   - position: 0
     prefix: '-nct'
-    valueFrom: '4'
+    valueFrom: $(inputs.threads)
   - position: 0
     prefix: '--knownSites'
     valueFrom: $(inputs.known_indels_file)

@@ -24,6 +24,7 @@ arguments:
   - position: 3
     prefix: '--overlap'
     valueFrom: '6'
+  # automatic threads
   - position: 1
     prefix: '-j'
     valueFrom: '0'

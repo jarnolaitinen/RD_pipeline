@@ -25,7 +25,7 @@ inputs:
     inputBinding:
       position: 2
   - id: threads
-    type: int?
+    type: string?
     default: 8
     inputBinding: 
       position: 1

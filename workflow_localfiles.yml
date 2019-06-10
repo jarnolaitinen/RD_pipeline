@@ -31,4 +31,5 @@ known_sites_file:
 readgroup_str: '@RG\tID:Seq01p\tSM:Seq01\tPL:ILLUMINA\tPI:330'
 # GATK Haplotype caller sequence
 sample_name: 'abc2'
-chromosome: '1'
+#chromosome: '1'
+gqb: [20, 25, 30, 35, 40, 45, 50, 70, 90, 99]

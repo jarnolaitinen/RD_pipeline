@@ -42,8 +42,8 @@ inputs:
   - id: sample_name
     type: string
   - id: threads
-    type: int?
-    default: 2
+    type: string?
+    default: "2"
     inputBinding:
       position: 1
       prefix: '-t'

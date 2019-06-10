@@ -16,6 +16,9 @@ inputs:
     type: string
   - id: chromosome
     type: string?
+  # bwa mem, samtools sort, gatk haplotype caller 
+  - id: threads
+    type: string?
   - id: sample_name
     type: string
   - id: lftp_out_conf
@@ -125,6 +128,9 @@ steps:
       - id: reference_genome
         source:
           - bwa_index/output
+      - id: threads
+        source: 
+          - threads
     out:
       - id: aligned_sam
     run: bwa-mem.cwl
@@ -134,6 +140,9 @@ steps:
       - id: input
         source:
           - bwa_mem/aligned_sam
+      - id: threads
+        source:
+          - threads
     out:
       - id: sorted_bam
     run: samtools_sort_bam.cwl
@@ -204,6 +213,9 @@ steps:
       - id: known_indels_file
         source:
           - known_indels_in/known_indels_file
+      - id: threads
+        source:
+          - threads
     out:
       - id: br_model
     run: gatk-base_recalibration.cwl
@@ -243,6 +255,9 @@ steps:
       - id: chromosome
         source: 
           - chromosome
+      - id: threads
+        source: 
+          - threads
     out:
       - id: gvcf
     run: gatk-haplotype_caller.cwl

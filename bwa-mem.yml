@@ -6,6 +6,6 @@ reference_genome:
   path: /mnt/input/hs37d5.fa
 index_files:
   type: File
-threads: 8
+threads: "8"
 read_group: '@RG\tID:Seq01p\tSM:Seq01\tPL:ILLUMINA\tPI:330'
 sample_name: 'abc1'

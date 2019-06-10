@@ -1,21 +1,21 @@
 # -R takes also .fai and .dict
 reference_genome:
   class: File
-  path: /mnt/input/hs37d5.fa
+  path: /mnt/data/input/hs37d5.fa
 
 # -I from ir step realigned BAM
 # also .bai
 input:
   class: File
-  path: /mnt/input/abc1.sorted.md.realigned.bam
+  path: /mnt/data/input/abc1.sorted.md.realigned.bam
 # -o
 # output_filename: recalibrated.bam
 
 dict:
   class: File
-  path: /mnt/input/hs37d5.dict
+  path: /mnt/data/input/hs37d5.dict
 
 # -BQSR   array of files?
 br_model:
   class: File
-  path: /mnt/input/abc1.sorted.md.realigned.br_model
+  path: /mnt/data/input/abc1.sorted.md.realigned.br_model

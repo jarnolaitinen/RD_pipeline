@@ -5,7 +5,7 @@ id: ir
 requirements:
   - class: InlineJavascriptRequirement
   - class: DockerRequirement
-    dockerPull: cnag/gatk:3.6-0
+    dockerPull: broadinstitute/gatk3:3.6-0
   - class: InitialWorkDirRequirement
     listing:
       - entry: $(inputs.reference_genome)
@@ -19,7 +19,9 @@ hints:
     ramMin: 8000
 
 baseCommand:
-  - gatk
+  - java
+  - -jar
+  - /usr/GenomeAnalysisTK.jar
   - '-T'
   - IndelRealigner
 

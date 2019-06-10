@@ -5,7 +5,7 @@ id: gatk_base_recalibration_print_reads
 requirements:
   - class: InlineJavascriptRequirement
   - class: DockerRequirement
-    dockerPull: cnag/gatk:3.6-0
+    dockerPull: broadinstitute/gatk3:3.6-0
   - class: InitialWorkDirRequirement
     listing:
       - entry: $(inputs.reference_genome)
@@ -21,7 +21,10 @@ hints:
     ramMin: 8000
 
 baseCommand:
-  - gatk
+  # - gatk
+  - java
+  - -jar
+  - /usr/GenomeAnalysisTK.jar
   - '-T'
   - PrintReads
 

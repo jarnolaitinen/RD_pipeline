@@ -1,14 +1,17 @@
 reference_genome:
   class: File
-  path: /mnt/input/hs37d5.fa
+  path: /mnt/data/input/hs37d5.fa
 # -I
 input:
   class: File
-  path:  /mnt/input/abc1.sorted.md.realigned.bam 
+  path:  /mnt/data/input/abc1.sorted.md.realigned.bam 
 dict:
   class: File
-  path: /mnt/input/hs37d5.dict
+  path: /mnt/data/input/hs37d5.dict
 # --knownSites
-known_sites:
+unzipped_known_sites_file:
   class: File
-  path: /mnt/input/Mills_and_1000G_gold_standard.indels.b37.vcf
+  path: /mnt/data/input/dnsnp_138.b37.vcf
+known_indels_file:
+  class: File
+  path: /mnt/data/input/Mills_and_1000G_gold_standard.indels.b37.vcf
