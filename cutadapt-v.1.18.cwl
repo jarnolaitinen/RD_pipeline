@@ -7,7 +7,7 @@ id: cutadapt2
 requirements:
   - class: InlineJavascriptRequirement
   - class: DockerRequirement
-    dockerPull: 'quay.io/biocontainers/cutadapt:1.18--py27h14c3975_1'
+    dockerPull: 'quay.io/biocontainers/cutadapt:2.10--py36h516909a_0'
   - class: ResourceRequirement
     outdirMin: 2500
     tmpdirMin: 2500
