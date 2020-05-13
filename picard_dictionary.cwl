@@ -8,7 +8,7 @@ baseCommand:
 requirements:
   - class: InlineJavascriptRequirement
   - class: DockerRequirement
-    dockerPull: broadinstitute/picard
+    dockerPull: broadinstitute/picard:2.22.2
   - class: ResourceRequirement
     outdirMin: 7500
     tmpdirMin: 7700
