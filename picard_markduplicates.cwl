@@ -8,7 +8,7 @@ baseCommand:
 requirements:
   - class: InlineJavascriptRequirement
   - class: DockerRequirement
-    dockerPull: quay.io/biocontainers/picard
+    dockerPull: broadinstitute/picard
   - class: ResourceRequirement
     outdirMin: 7500
     tmpdirMin: 7700
