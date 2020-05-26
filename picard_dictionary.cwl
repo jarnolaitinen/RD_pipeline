@@ -8,14 +8,14 @@ baseCommand:
 requirements:
   - class: InlineJavascriptRequirement
   - class: DockerRequirement
-    dockerPull: broadinstitute/picard:2.22.2
+    dockerPull: mgibio/picard-cwl  
   - class: ResourceRequirement
     outdirMin: 7500
     tmpdirMin: 7700
 hints:
   - class: ResourceRequirement
-    coresMin: 4
-    ramMin: 4000
+    coresMin: 15
+    ramMin: 14000
 
 inputs:
   - id: reference_genome
