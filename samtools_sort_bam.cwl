@@ -16,8 +16,8 @@ requirements:
     tmpdirMin: 7700
 hints:
   - class: ResourceRequirement
-    coresMin: 8
-    ramMin: 8000
+    coresMin: 15
+    ramMin: 48000
 
 inputs:
   - id: input
