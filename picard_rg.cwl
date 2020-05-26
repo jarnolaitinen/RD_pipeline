@@ -1,16 +1,12 @@
 class: CommandLineTool
 cwlVersion: v1.0
-$namespaces:
-  sbg: 'https://www.sevenbridges.com/'
 id: picard_addorreplacereadgroups
-baseCommand:
-  - picard
-  - AddOrReplaceReadGroups
-  
+
+baseCommand: [ java, -jar, /usr/picard/picard.jar, AddOrReplaceReadGroups ]   
 requirements:
   - class: InlineJavascriptRequirement
   - class: DockerRequirement
-    dockerPull: cnag/picard:2.18.25
+    dockerPull: broadinstitute/picard
   - class: ResourceRequirement
     coresMin: 8
     ramMin: 4000
