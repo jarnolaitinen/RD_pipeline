@@ -17,8 +17,8 @@ requirements:
     tmpdirMin: 10700
 hints:
   - class: ResourceRequirement
-    coresMin: 4
-    ramMin: 4000
+    coresMin: 14
+    ramMin: 34000
  
 inputs:
 #  - id: bwa_output_filename
