@@ -1,16 +1,13 @@
 class: CommandLineTool
 cwlVersion: v1.0
-$namespaces:
-  sbg: 'https://www.sevenbridges.com/'
-id: picard_validate_bam
-baseCommand:
-  - picard
-  - ValidateSamFile
-  
+
+id: picard_validate_sam
+
+baseCommand: [ java, -jar, /usr/picard/picard.jar, ValidateSamFile ]  
 requirements:
   - class: InlineJavascriptRequirement
   - class: DockerRequirement
-    dockerPull: cnag/picard:2.18.25
+    dockerPull: broadinstitute/picard
  - class: ResourceRequirement
     coresMin: 8
     ramMin: 4000
