@@ -1,22 +1,19 @@
 class: CommandLineTool
 cwlVersion: v1.0
 id: picard_markduplicates
-baseCommand:
-  - picard
-  - MarkDuplicates
-  
+baseCommand: [ java, -jar, /usr/picard/picard.jar, MarkDuplicates ]   
 requirements:
   - class: InlineJavascriptRequirement
   - class: DockerRequirement
-    dockerPull: broadinstitute/picard:2.22.2
+    dockerPull: broadinstitute/picard
   - class: ResourceRequirement
     outdirMin: 7500
     tmpdirMin: 7700
 
 hints:
   - class: ResourceRequirement
-    coresMin: 4
-    ramMin: 4000
+    coresMin: 10
+    ramMin: 14000
 
 inputs:
   input:
