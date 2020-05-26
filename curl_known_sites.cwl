@@ -24,9 +24,7 @@ inputs:
 
 outputs:
   known_sites_file:
-    type:
-      type: array
-      items: [ File, Directory ]  
+    type: File
     outputBinding:
       glob: "*.gz"
  
