@@ -1,23 +1,21 @@
 class: CommandLineTool
 cwlVersion: v1.0
-$namespaces:
-  sbg: 'https://www.sevenbridges.com/'
+
 id: picard_sortsam
-baseCommand:
-  - picard
-  - SortSam
-  
+
+baseCommand: [ java, -jar, /usr/picard/picard.jar, SortSam ]
+
 requirements:
   - class: InlineJavascriptRequirement
   - class: DockerRequirement
-    dockerPull: cnag/picard:2.18.25
+    dockerPull: broadinstitute/picard
   - class: ResourceRequirement
     outdirMin: 7500
     tmpdirMin: 7700
 hints:
   - class: ResourceRequirement
-    coresMin: 4
-    ramMin: 3000
+    coresMin: 8
+    ramMin: 13000
 
 
 inputs:
