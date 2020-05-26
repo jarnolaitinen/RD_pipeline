@@ -12,8 +12,8 @@ requirements:
 
 hints:
   - class: ResourceRequirement
-    coresMin: 10
-    ramMin: 14000
+    coresMin: 14
+    ramMin: 54000
 
 inputs:
   input:
