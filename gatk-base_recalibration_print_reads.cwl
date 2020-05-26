@@ -17,8 +17,8 @@ requirements:
 
 hints:
   - class: ResourceRequirement
-    coresMin: 8
-    ramMin: 8000
+    coresMin: 15
+    ramMin: 58000
 
 baseCommand:
   # - gatk
