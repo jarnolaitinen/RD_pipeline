@@ -1,14 +1,13 @@
 class: CommandLineTool
 cwlVersion: v1.0
-id: picard_markduplicates
-baseCommand:
-  - picard
-  - CreateSequenceDictionary
+id: picard_create_seq_dict
+
+baseCommand: [ java, -jar, /usr/picard/picard.jar, CreateSequenceDictionary ]
   
 requirements:
   - class: InlineJavascriptRequirement
   - class: DockerRequirement
-    dockerPull: mgibio/picard-cwl  
+    dockerPull: broadinstitute/picard  
   - class: ResourceRequirement
     outdirMin: 7500
     tmpdirMin: 7700
