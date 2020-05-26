@@ -15,8 +15,8 @@ requirements:
     tmpdirMin: 7700
 hints:
   - class: ResourceRequirement
-    coresMin: 4
-    ramMin: 4000
+    coresMin: 14
+    ramMin: 54000
 
 baseCommand:
   - java
