@@ -1,8 +1,7 @@
 #!/usr/bin/env cwl-runner
 class: CommandLineTool
 cwlVersion: v1.0
-$namespaces:
-  sbg: 'https://www.sevenbridges.com/'
+
 id: cutadapt2
 requirements:
   - class: InlineJavascriptRequirement
@@ -14,7 +13,7 @@ requirements:
 hints:
   - class: ResourceRequirement
     coresMin: 4
-    ramMin: 4000
+    ramMin: 14000
 
 baseCommand: [cutadapt, --interleaved]
 arguments: 
