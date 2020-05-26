@@ -16,7 +16,7 @@ requirements:
 hints:
   - class: ResourceRequirement
     coresMin: 8
-    ramMin: 15000
+    ramMin: 35000
 
 inputs:
   - id: reference_file
