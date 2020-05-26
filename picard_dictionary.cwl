@@ -13,8 +13,8 @@ requirements:
     tmpdirMin: 7700
 hints:
   - class: ResourceRequirement
-    coresMin: 15
-    ramMin: 14000
+    coresMin: 2
+    ramMin: 8000
 
 inputs:
   - id: reference_genome
