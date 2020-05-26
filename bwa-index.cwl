@@ -14,7 +14,7 @@ requirements:
 
 hints:
   - class: ResourceRequirement
-    ramMin: 14000   
+    ramMin: 44000   
     coresMin: 15
 
 baseCommand:
