@@ -20,7 +20,7 @@ requirements:
 hints:
   - class: ResourceRequirement
     coresMin: 8
-    ramMin: 8000
+    ramMin: 28000
 
 inputs:
   - id: input
