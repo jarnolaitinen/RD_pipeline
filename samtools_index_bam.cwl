@@ -12,8 +12,8 @@ requirements:
   - class: DockerRequirement
     dockerPull: biocontainers/samtools:1.3.1
   - class: ResourceRequirement
-    coresMin: 4
-    ramMin: 8000
+    coresMin: 8
+    ramMin: 28000
     outdirMin: 7500
     tmpdirMin: 7700
 
