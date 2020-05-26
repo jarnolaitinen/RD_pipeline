@@ -14,9 +14,8 @@ requirements:
 
 hints:
   - class: ResourceRequirement
-    ramMin: 44000   
-    coresMin: 15
-
+    ramMin: 30000   
+    coresMin: 12
 baseCommand:
 - bwa
 - index
