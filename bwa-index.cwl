@@ -4,7 +4,7 @@ class: CommandLineTool
 requirements:
   - class: InlineJavascriptRequirement
   - class: DockerRequirement
-    dockerPull: quay.io/biocontainers/bwa:0.7.17--hed695b0_7
+    dockerPull: biocontainers/bwa
   - class: InitialWorkDirRequirement
     listing:
       - entry: $(inputs.reference_genome) 
