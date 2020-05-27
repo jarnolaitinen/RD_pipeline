@@ -1,7 +1,6 @@
 class: CommandLineTool
 cwlVersion: v1.0
-$namespaces:
-  sbg: 'https://www.sevenbridges.com/'
+
 baseCommand:
   - bwa
   - mem
@@ -11,7 +10,7 @@ requirements:
   - class: InlineJavascriptRequirement
   - class: MultipleInputFeatureRequirement
   - class: DockerRequirement
-    dockerPull: quay.io/biocontainers/bwa:0.7.17--hed695b0_7
+    dockerPull: biocontainers/bwa
   - class: ResourceRequirement
     outdirMin: 10500
     tmpdirMin: 10700
