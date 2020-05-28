@@ -10,7 +10,7 @@ requirements:
   - class: InlineJavascriptRequirement
   - class: MultipleInputFeatureRequirement
   - class: DockerRequirement
-    dockerPull: biocontainers/bwa
+    dockerPull: biocontainers/bwa:v0.7.12_cv3
   - class: ResourceRequirement
     outdirMin: 10500
     tmpdirMin: 10700
