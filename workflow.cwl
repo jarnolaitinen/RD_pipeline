@@ -262,7 +262,13 @@ steps:
       - id: gvcf
     run: gatk-haplotype_caller.cwl
     label: gatk-haplotype_caller
-
+  - id: encrypt
+    run: lega_upload.cwl
+    label: lega_upload.cwl
+    in:
+      - id: file_to_encrypt
+        source: gatk_haplotype_caller/gvcf
+    out: []
   - id: lftp_out
     in: 
       - id: lftp_out_conf
