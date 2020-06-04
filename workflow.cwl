@@ -21,8 +21,6 @@ inputs:
     type: string?
   - id: sample_name
     type: string
-  - id: lftp_out_conf
-    type: File
 
 outputs: []
 
@@ -262,29 +260,18 @@ steps:
       - id: gvcf
     run: gatk-haplotype_caller.cwl
     label: gatk-haplotype_caller
+    
   - id: encrypt
     run: lega_upload.cwl
     label: lega_upload.cwl
     in:
       - id: file_to_encrypt
-        source: gatk_haplotype_caller/gvcf
-    out: []
-  - id: lftp_out
-    in: 
-      - id: lftp_out_conf
-        source: lftp_out_conf
-      - id: files_to_send
         source:
-          - picard_markduplicates/output_metrics
-          - samtools_index/index_fai
-      - id: bam
-        source:
-          - gatk-base_recalibration_print_reads/bqsr_bam
-      - id: gvcf
-        source:      
-          - gatk_haplotype_caller/gvcf
+        - gatk_haplotype_caller/gvcf
+        - gatk-base_recalibration_print_reads/bqsr_bam
+        - samtools_index/index_fai
+        - picard_markduplicates/output_metrics
     out: []
-    run: lftp.cwl
 
 requirements:
   - class: MultipleInputFeatureRequirement
