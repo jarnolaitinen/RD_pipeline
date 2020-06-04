@@ -16,7 +16,8 @@ hints:
 
 inputs:
   - id: file_to_encrypt
-    type: File
+      type: array
+      items: File
     inputBinding:
       position: 1
 
