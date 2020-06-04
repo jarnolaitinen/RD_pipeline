@@ -5,6 +5,7 @@ class: CommandLineTool
 doc: "Encrypt the input file and sftp it"
 requirements:
   - class: InlineJavascriptRequirement
+  - class: MultipleInputFeatureRequirement
   - class: DockerRequirement
     dockerPull: lvarin/crypt4gh-lftp:20200604
   - class: ResourceRequirement
