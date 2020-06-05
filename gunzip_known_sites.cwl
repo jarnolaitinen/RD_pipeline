@@ -4,7 +4,7 @@ cwlVersion: v1.0
 
 baseCommand: [ "gunzip" ]
 
-arguments: [ "-c" ]
+arguments: [ "-c","-v" ]
 
 requirements:
   - class: InlineJavascriptRequirement
