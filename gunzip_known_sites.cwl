@@ -13,8 +13,8 @@ requirements:
   - class: ResourceRequirement
     coresMin: 2
     ramMin: 5000
-    outdirMin: 12500
-    tmpdirMin: 12500
+    outdirMin: 5000
+    tmpdirMin: 5000
 
 inputs:
   - id: known_sites_file
@@ -25,7 +25,5 @@ inputs:
 outputs:
   - id: unzipped_known_sites_file
     type: stdout
-    streamable: true
-    #outputBinding:
-    #  glob: "*.gvcf"
+
 stdout: $(inputs.known_sites_file.nameroot)
