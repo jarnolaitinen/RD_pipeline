@@ -12,7 +12,7 @@ requirements:
     dockerPull: jlaitinen/lftpalpine
   - class: ResourceRequirement
     coresMin: 2
-    ramMin: 2000
+    ramMin: 5000
     outdirMin: 12500
     tmpdirMin: 12500
 
@@ -25,6 +25,7 @@ inputs:
 outputs:
   - id: unzipped_known_sites_file
     type: stdout
+    streamable: true
     #outputBinding:
     #  glob: "*.gvcf"
 stdout: $(inputs.known_sites_file.nameroot)
