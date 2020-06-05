@@ -13,8 +13,8 @@ requirements:
   - class: ResourceRequirement
     coresMin: 2
     ramMin: 5000
-    outdirMin: 5000
-    tmpdirMin: 5000
+    outdirMin: 15000
+    tmpdirMin: 15000
 
 inputs:
   - id: known_sites_file
