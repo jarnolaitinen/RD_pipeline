@@ -49,22 +49,7 @@ steps:
       - id: known_indels_file
     run: curl_indels.cwl
 
-  - id: known_sites_in
-    in:
-      - id: curl_config_file
-        source: curl_known_sites_url
-    out:
-      - id: known_sites_file
-    run: curl_known_sites.cwl
 
-  - id: unzipped_known_sites
-    in:
-      - id: known_sites_file
-        source:
-          - known_sites_in/known_sites_file
-    out:
-      - id: unzipped_known_sites_file
-    run: gunzip_known_sites.cwl
 
   - id: gunzip
     in:
@@ -193,6 +178,23 @@ steps:
       - id: realigned_bam
     run: gatk-ir.cwl
     label: gatk-ir
+
+  - id: known_sites_in
+    in:
+      - id: curl_config_file
+        source: curl_known_sites_url
+    out:
+      - id: known_sites_file
+    run: curl_known_sites.cwl
+
+  - id: unzipped_known_sites
+    in:
+      - id: known_sites_file
+        source:
+          - known_sites_in/known_sites_file
+    out:
+      - id: unzipped_known_sites_file
+    run: gunzip_known_sites.cwl
 
   - id: gatk-base_recalibration
     in:
