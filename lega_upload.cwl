@@ -9,7 +9,8 @@ requirements:
   - class: DockerRequirement
     dockerPull: lvarin/crypt4gh-lftp:20200604
   - class: ResourceRequirement
-    outdirMin: 7200
+    outdirMin: 15000
+    tmpdirMin: 15000
 hints:
   - class: ResourceRequirement
     coresMin: 1
