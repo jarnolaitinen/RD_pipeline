@@ -41,16 +41,6 @@ steps:
       - id: in_files
     run: curl.cwl
 
-  - id: known_indels_in
-    in:
-      - id: curl_config_file
-        source: curl_known_indels_url
-    out:
-      - id: known_indels_file
-    run: curl_indels.cwl
-
-
-
   - id: gunzip
     in:
       - id: reference_file
@@ -141,6 +131,15 @@ steps:
     run: picard_markduplicates.cwl
     label: picard-MD
 
+
+  - id: known_indels_in
+    in:
+      - id: curl_config_file
+        source: curl_known_indels_url
+    out:
+      - id: known_indels_file
+    run: curl_indels.cwl
+    
   - id: gatk3-rtc
     in:
       - id: input
