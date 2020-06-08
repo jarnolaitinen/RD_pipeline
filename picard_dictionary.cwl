@@ -11,8 +11,6 @@ requirements:
   - class: ResourceRequirement
     outdirMin: 7500
     tmpdirMin: 7700
-hints:
-  - class: ResourceRequirement
     coresMin: 2
     ramMin: 8000
 
