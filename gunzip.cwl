@@ -4,7 +4,7 @@ cwlVersion: v1.0
 
 baseCommand: [ "gunzip" ]
 
-arguments: [ "-c","-v" ]
+arguments: [ "-c" ]
 
 requirements:
   - class: InlineJavascriptRequirement
@@ -20,7 +20,7 @@ inputs:
   - id: reference_file
     type: File[]
     inputBinding:
-      position: 2
+      position: 1
 outputs:
   - id: unzipped_fasta
     type: stdout
